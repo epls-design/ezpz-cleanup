@@ -3,7 +3,7 @@
  * Plugin Name:  EZPZ Wordpress Starter
  * Plugin URI:   https://github.com/epls-design/ezpz-cleanup/
  * Description:  Removes clutter and unnecessary junk from Wordpress. Applies some minor security fixes. Adds white-label branding to admin areas and creates a "Client Admin" user role. For more info see the README file. Some code forked from https://github.com/chuckreynolds/Selfish-Fresh-Start.
- * Version:      1.0.0
+ * Version:      1.0.1
  * Author:       EPLS Design
  * Author URI:   https://epls.design
  * License:      GPL-2.0+
@@ -33,7 +33,6 @@ class Ezpz_Wordpress_Starter {
 	public function __construct() {
 
     add_action( 'init', array( $this, 'ezpz_init' ) );
-    add_action( 'admin_init', array( $this, 'ezpz_admin_init' ) );
     add_action( 'after_setup_theme', array( $this, 'ezpz_after_theme_setup' ) );
 
 	}
@@ -50,19 +49,9 @@ class Ezpz_Wordpress_Starter {
     $this->ezpz_trackbacks_smilies();
     $this->ezpz_client_role();
     $this->ezpz_login_white_label();
-
-  }
-  
-	/**
-	 * Functions called at the admin_init action
-	 *
-	 * @return void
-	 */
-	public function ezpz_admin_init() {
-
 		$this->ezpz_admin_branding();
 
-	}  
+  }
 
 	/**
 	 * Removes theme and plugin editor links if not defined already
