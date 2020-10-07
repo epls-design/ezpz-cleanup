@@ -120,50 +120,98 @@ class Ezpz_Wordpress_Starter {
         'client-admin', 
         'Client', 
         array(
-            'create_posts' => true,
-            'create_users' => true,
-            'delete_others_pages' => true,
-            'delete_others_posts' => true,
-            'delete_pages' => true,
-            'delete_posts' => true,
-            'delete_private_pages' => true,
-            'delete_private_posts' => true,
-            'delete_published_pages' => true,
-            'delete_published_posts' => true,
-            'delete_users' => true,
-            'edit_dashboard' => true,
-            'edit_others_pages' => true,
-            'edit_others_posts' => true,
-            'edit_pages' => true,
-            'edit_posts' => true,
-            'edit_private_pages' => true,
-            'edit_private_posts' => true,
-            'edit_published_pages' => true,
-            'edit_published_posts' => true,
-            'edit_theme_options' => true,
-            'edit_users' => true,
-            'level_0' => true,
-            'level_1' => true,
-            'level_2' => true,
-            'level_3' => true,
-            'level_4' => true,
-            'level_5' => true,
-            'level_6' => true,
-            'level_7' => true,
-            'list_users' => true,
-            'manage_categories' => true,
-            'manage_links' => true,
-            'moderate_comments' => true,
-            'promote_users' => true,
-            'publish_pages' => true,
-            'publish_posts' => true,
-            'read' => true,
-            'read_private_pages' => true,
-            'read_private_posts' => true,
-            'unfiltered_html' => true,
-            'update_core' => true,
-            'update_plugins' => true,
-            'upload_files' => true
+					'assign_product_terms' => true,
+					'assign_shop_coupon_terms' => true,
+					'assign_shop_order_terms' => true,
+					'create_posts' => true,
+					'create_users' => true,
+					'delete_others_pages' => true,
+					'delete_others_posts' => true,
+					'delete_others_products' => true,
+					'delete_others_shop_coupons' => true,
+					'delete_others_shop_orders' => true,
+					'delete_pages' => true,
+					'delete_posts' => true,
+					'delete_private_pages' => true,
+					'delete_private_posts' => true,
+					'delete_private_products' => true,
+					'delete_private_shop_coupons' => true,
+					'delete_private_shop_orders' => true,
+					'delete_product' => true,
+					'delete_product_terms' => true,
+					'delete_products' => true,
+					'delete_published_pages' => true,
+					'delete_published_posts' => true,
+					'delete_published_products' => true,
+					'delete_published_shop_coupons' => true,
+					'delete_published_shop_orders' => true,
+					'delete_shop_coupon' => true,
+					'delete_shop_coupon_terms' => true,
+					'delete_shop_coupons' => true,
+					'delete_shop_order' => true,
+					'delete_shop_order_terms' => true,
+					'delete_shop_orders' => true,
+					'delete_users' => true,
+					'edit_dashboard' => true,
+					'edit_others_pages' => true,
+					'edit_others_posts' => true,
+					'edit_others_products' => true,
+					'edit_others_shop_coupons' => true,
+					'edit_others_shop_orders' => true,
+					'edit_pages' => true,
+					'edit_posts' => true,
+					'edit_private_pages' => true,
+					'edit_private_posts' => true,
+					'edit_private_products' => true,
+					'edit_private_shop_coupons' => true,
+					'edit_private_shop_orders' => true,
+					'edit_product' => true,
+					'edit_product_terms' => true,
+					'edit_products' => true,
+					'edit_published_pages' => true,
+					'edit_published_posts' => true,
+					'edit_published_products' => true,
+					'edit_published_shop_coupons' => true,
+					'edit_published_shop_orders' => true,
+					'edit_shop_coupon' => true,
+					'edit_shop_coupon_terms' => true,
+					'edit_shop_coupons' => true,
+					'edit_shop_order' => true,
+					'edit_shop_order_terms' => true,
+					'edit_shop_orders' => true,
+					'edit_theme_options' => true,
+					'edit_users' => true,
+					'list_users' => true,
+					'manage_categories' => true,
+					'manage_links' => true,
+					'manage_product_terms' => true,
+					'manage_shop_coupon_terms' => true,
+					'manage_shop_order_terms' => true,
+					'manage_woocommerce' => true,
+					'moderate_comments' => true,
+					'promote_users' => true,
+					'publish_pages' => true,
+					'publish_posts' => true,
+					'publish_products' => true,
+					'publish_shop_coupons' => true,
+					'publish_shop_orders' => true,
+					'read' => true,
+					'read_private_pages' => true,
+					'read_private_posts' => true,
+					'read_private_products' => true,
+					'read_private_shop_coupons' => true,
+					'read_private_shop_orders' => true,
+					'read_product' => true,
+					'read_shop_coupon' => true,
+					'read_shop_order' => true,
+					'remove_users' => true,
+					'unfiltered_html' => true,
+					'update_core' => true,
+					'update_plugins' => true,
+					'update_themes' => true,
+					'upload_files' => true,
+					'view_woocommerce_reports' => true,
+					'wf2fa_activate_2fa_self' => true,
         )
     );
   }
@@ -292,13 +340,17 @@ class Ezpz_Wordpress_Starter {
 
     /* Remove feed links from wp_head */
     remove_action( 'wp_head', 'feed_links', 2 );
-    remove_action('wp_head', 'feed_links_extra', 3 );
+    remove_action( 'wp_head', 'feed_links_extra', 3 );
 
     /* Metaboxes */
 		add_action( 'wp_dashboard_setup',    array( $this, 'ezpz_dashboard_metaboxes' ) ); // Remove Wordpress widgets
 		add_action( 'do_meta_boxes',         array( $this, 'ezpz_plugin_metaboxes' ) ); // Remove annoying plugin specific widgets
 		add_action( 'admin_menu',            array( $this, 'ezpz_post_metaboxes' ) );
 		add_action( 'admin_menu',            array( $this, 'ezpz_page_metaboxes' ) );
+
+		/* Restricted Admin Menus */
+		add_action( 'admin_menu', 					 array( $this, 'ezpz_remove_admin_pages'), 99 ); // Removes oft-used admin pages from the menu
+		add_action( 'admin_init', 					 array( $this, 'ezpz_admin_redirect') ); // Redirects any access to restricted pages
 
     /* Prevents Non-Admins being nagged to update */
     add_action( 'admin_head',            array( $this, 'ezpz_update_notification_non_admins' ), 1 );
@@ -324,6 +376,7 @@ class Ezpz_Wordpress_Starter {
     remove_action( 'rest_api_init', 'wp_oembed_register_route' );    
 	}
 
+
 	/**
 	 * Removes some dashboard widgets
 	 *
@@ -338,6 +391,46 @@ class Ezpz_Wordpress_Starter {
 		remove_meta_box( 'dashboard_primary',        'dashboard', 'side' );   // WordPress Events and News
 
 	}
+
+	/**
+	 * Removes oft-used admin pages from the menu
+	 *
+	 * @return void
+	 */
+	public function ezpz_remove_admin_pages() {
+		global $current_user;
+    get_currentuserinfo();
+
+    // If Administrator remove some unnecessary submenus
+    if (current_user_can( 'administrator' ) ) {	
+			remove_submenu_page( 'tools.php', 'export.php'  ); // Export 
+			remove_submenu_page( 'tools.php', 'import.php'  ); // Import
+			remove_submenu_page( 'tools.php', 'tools.php'  ); // Available Tools
+			// Note: Pages still available at direct URLs
+		}
+		else {
+			// Otherwise remove all of these...
+			remove_menu_page('tools.php');
+			remove_menu_page('options-general.php');
+			remove_menu_page('edit.php?post_type=acf-field-group'); // ACF
+		}
+	}
+
+	public function ezpz_admin_redirect() {
+		global $pagenow;
+		// Todo: $pagenow just returns the root and not any queries - so edit.php?post_type=acf-field-group does not work. Better to check against actual URL? Sub pages eg. options-media.php are also not captured below...
+		$restricted_urls = array(
+			'tools.php',
+			'options-general.php',
+			'edit.php?post_type=acf-field-group'
+		);
+
+		if(in_array($pagenow,$restricted_urls) && !current_user_can( 'administrator' ) ) {	
+			// User not authorized to access page, redirect to dashboard
+      wp_redirect( admin_url( 'index.php' ) ); 
+		}
+
+	}	
 
 	/**
 	 * Removes some plugin dashboard widgets.
