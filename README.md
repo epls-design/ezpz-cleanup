@@ -21,7 +21,7 @@ This plugin is a fork of [Selfish Fresh Start](https://github.com/chuckreynolds/
 - Removes shortlink generator from head
 - Removes unneeded dashboard widgets - core and plugin specific
 - Remove feed links from head
-- Removes pointlesss links to export, import and tools from admin menu
+- Removes pointless links to export, import and tools from admin menu
 
 ### Performance:
 - Disables self pingback and pingback from other blogs
@@ -29,6 +29,8 @@ This plugin is a fork of [Selfish Fresh Start](https://github.com/chuckreynolds/
 - Fixes bad formatting from text pasted in from Word
 - Remove WP Rest API
 
+### SEO:
+- Automatically adds Alt tags to images on upload
 ### White Label:
 - Changes login logo and brands login page
 - Sets 'remember me' to checked by default on log in screen
@@ -36,4 +38,4 @@ This plugin is a fork of [Selfish Fresh Start](https://github.com/chuckreynolds/
 - Replace admin menubar icon with EPLS logo
 - Adds EPLS credit to admin dashboard footer
 - Creates a Dashboard widget with EPLS support information
-- Prevents users with insufficient priveleges being nagged to update core
+- Prevents users with insufficient privileges being nagged to update core
