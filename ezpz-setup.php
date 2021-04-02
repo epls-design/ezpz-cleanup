@@ -72,11 +72,12 @@ class Ezpz_Wordpress_Starter {
 	 * @return void
 	 */
 	public function ezpz_restrict_post_revisions() {
-    // Restricts the amount of post revisions to 20, to reduce database bloat from trigger-happy editors
-		if ( ! defined( 'WP_POST_REVISIONS' ) ) {
-			define( 'WP_POST_REVISIONS', 20 );
-		}
-
+    add_filter( 'wp_revisions_to_keep', function( $num, $post )
+			{
+				if (post_type_supports($post->post_type, 'revisions')) {
+						return 10;
+				}
+			}, PHP_INT_MAX, 2 );
 	}  
 
 	/**
@@ -400,7 +401,7 @@ class Ezpz_Wordpress_Starter {
 	 */
 	public function ezpz_remove_admin_pages() {
 		global $current_user;
-    get_currentuserinfo();
+    wp_get_current_user();
 
     // If Administrator remove some unnecessary submenus
     if (current_user_can( 'administrator' ) ) {	
