@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  EZPZ Wordpress Starter
  * Plugin URI:   https://github.com/epls-design/ezpz-cleanup/
- * Description:  Removes clutter and unnecessary junk from Wordpress. Applies some minor security fixes. Adds white-label branding to admin areas and creates a "Client Admin" user role. For more info see the README file. Some code forked from https://github.com/chuckreynolds/Selfish-Fresh-Start.
+ * Description:  Removes clutter and unnecessary junk from Wordpress. Applies some minor security fixes. Adds white-label branding to admin areas and creates a "Client Admin" user role. Automatically adds Alt tags to images on upload. For more info see the README file.
  * Version:      1.0.1
  * Author:       EPLS Design
  * Author URI:   https://epls.design
@@ -34,7 +34,7 @@ class Ezpz_Wordpress_Starter {
 
     add_action( 'init', array( $this, 'ezpz_init' ) );
     add_action( 'after_setup_theme', array( $this, 'ezpz_after_theme_setup' ) );
-
+		add_action( 'add_attachment', array( $this, 'ezpz_auto_alt_img_upload' ) );
 	}
 
 	/**
@@ -117,105 +117,105 @@ class Ezpz_Wordpress_Starter {
     if ( ! isset( $wp_roles ) )
         $wp_roles = new WP_Roles();
         
-    $wp_roles->add_role( 
-        'client-admin', 
-        'Client', 
-        array(
-					'assign_product_terms' => true,
-					'assign_shop_coupon_terms' => true,
-					'assign_shop_order_terms' => true,
-					'create_posts' => true,
-					'create_users' => true,
-					'delete_others_pages' => true,
-					'delete_others_posts' => true,
-					'delete_others_products' => true,
-					'delete_others_shop_coupons' => true,
-					'delete_others_shop_orders' => true,
-					'delete_pages' => true,
-					'delete_posts' => true,
-					'delete_private_pages' => true,
-					'delete_private_posts' => true,
-					'delete_private_products' => true,
-					'delete_private_shop_coupons' => true,
-					'delete_private_shop_orders' => true,
-					'delete_product' => true,
-					'delete_product_terms' => true,
-					'delete_products' => true,
-					'delete_published_pages' => true,
-					'delete_published_posts' => true,
-					'delete_published_products' => true,
-					'delete_published_shop_coupons' => true,
-					'delete_published_shop_orders' => true,
-					'delete_shop_coupon' => true,
-					'delete_shop_coupon_terms' => true,
-					'delete_shop_coupons' => true,
-					'delete_shop_order' => true,
-					'delete_shop_order_terms' => true,
-					'delete_shop_orders' => true,
-					'delete_users' => true,
-					'edit_dashboard' => true,
-					'edit_others_pages' => true,
-					'edit_others_posts' => true,
-					'edit_others_products' => true,
-					'edit_others_shop_coupons' => true,
-					'edit_others_shop_orders' => true,
-					'edit_pages' => true,
-					'edit_posts' => true,
-					'edit_private_pages' => true,
-					'edit_private_posts' => true,
-					'edit_private_products' => true,
-					'edit_private_shop_coupons' => true,
-					'edit_private_shop_orders' => true,
-					'edit_product' => true,
-					'edit_product_terms' => true,
-					'edit_products' => true,
-					'edit_published_pages' => true,
-					'edit_published_posts' => true,
-					'edit_published_products' => true,
-					'edit_published_shop_coupons' => true,
-					'edit_published_shop_orders' => true,
-					'edit_shop_coupon' => true,
-					'edit_shop_coupon_terms' => true,
-					'edit_shop_coupons' => true,
-					'edit_shop_order' => true,
-					'edit_shop_order_terms' => true,
-					'edit_shop_orders' => true,
-					'edit_theme_options' => true,
-					'edit_users' => true,
-					'list_users' => true,
-					'manage_categories' => true,
-					'manage_options' => true,
-					'manage_links' => true,
-					'manage_product_terms' => true,
-					'manage_shop_coupon_terms' => true,
-					'manage_shop_order_terms' => true,
-					'manage_woocommerce' => true,
-					'moderate_comments' => true,
-					'promote_users' => true,
-					'publish_pages' => true,
-					'publish_posts' => true,
-					'publish_products' => true,
-					'publish_shop_coupons' => true,
-					'publish_shop_orders' => true,
-					'read' => true,
-					'read_private_pages' => true,
-					'read_private_posts' => true,
-					'read_private_products' => true,
-					'read_private_shop_coupons' => true,
-					'read_private_shop_orders' => true,
-					'read_product' => true,
-					'read_shop_coupon' => true,
-					'read_shop_order' => true,
-					'remove_users' => true,
-					'unfiltered_html' => false,
-					'update_core' => true,
-					'update_plugins' => true,
-					'update_themes' => true,
-					'upload_files' => true,
-					'view_woocommerce_reports' => true,
-					'wf2fa_activate_2fa_self' => true,
-        )
-    );
+				$wp_roles->add_role( 
+					'client-admin', 
+					'Client', 
+					array(
+						'assign_product_terms' => true,
+						'assign_shop_coupon_terms' => true,
+						'assign_shop_order_terms' => true,
+						'create_posts' => true,
+						'create_users' => true,
+						'delete_others_pages' => true,
+						'delete_others_posts' => true,
+						'delete_others_products' => true,
+						'delete_others_shop_coupons' => true,
+						'delete_others_shop_orders' => true,
+						'delete_pages' => true,
+						'delete_posts' => true,
+						'delete_private_pages' => true,
+						'delete_private_posts' => true,
+						'delete_private_products' => true,
+						'delete_private_shop_coupons' => true,
+						'delete_private_shop_orders' => true,
+						'delete_product' => true,
+						'delete_product_terms' => true,
+						'delete_products' => true,
+						'delete_published_pages' => true,
+						'delete_published_posts' => true,
+						'delete_published_products' => true,
+						'delete_published_shop_coupons' => true,
+						'delete_published_shop_orders' => true,
+						'delete_shop_coupon' => true,
+						'delete_shop_coupon_terms' => true,
+						'delete_shop_coupons' => true,
+						'delete_shop_order' => true,
+						'delete_shop_order_terms' => true,
+						'delete_shop_orders' => true,
+						'delete_users' => true,
+						'edit_dashboard' => true,
+						'edit_others_pages' => true,
+						'edit_others_posts' => true,
+						'edit_others_products' => true,
+						'edit_others_shop_coupons' => true,
+						'edit_others_shop_orders' => true,
+						'edit_pages' => true,
+						'edit_posts' => true,
+						'edit_private_pages' => true,
+						'edit_private_posts' => true,
+						'edit_private_products' => true,
+						'edit_private_shop_coupons' => true,
+						'edit_private_shop_orders' => true,
+						'edit_product' => true,
+						'edit_product_terms' => true,
+						'edit_products' => true,
+						'edit_published_pages' => true,
+						'edit_published_posts' => true,
+						'edit_published_products' => true,
+						'edit_published_shop_coupons' => true,
+						'edit_published_shop_orders' => true,
+						'edit_shop_coupon' => true,
+						'edit_shop_coupon_terms' => true,
+						'edit_shop_coupons' => true,
+						'edit_shop_order' => true,
+						'edit_shop_order_terms' => true,
+						'edit_shop_orders' => true,
+						'edit_theme_options' => true,
+						'edit_users' => true,
+						'list_users' => true,
+						'manage_categories' => true,
+						'manage_links' => true,
+						'manage_options' => true,
+						'manage_product_terms' => true,
+						'manage_shop_coupon_terms' => true,
+						'manage_shop_order_terms' => true,
+						'manage_woocommerce' => true,
+						'moderate_comments' => true,
+						'promote_users' => true,
+						'publish_pages' => true,
+						'publish_posts' => true,
+						'publish_products' => true,
+						'publish_shop_coupons' => true,
+						'publish_shop_orders' => true,
+						'read' => true,
+						'read_private_pages' => true,
+						'read_private_posts' => true,
+						'read_private_products' => true,
+						'read_private_shop_coupons' => true,
+						'read_private_shop_orders' => true,
+						'read_product' => true,
+						'read_shop_coupon' => true,
+						'read_shop_order' => true,
+						'remove_users' => true,
+						'unfiltered_html' => true,
+						'update_core' => true,
+						'update_plugins' => true,
+						'update_themes' => true,
+						'upload_files' => true,
+						'view_woocommerce_reports' => true,
+						'wf2fa_activate_2fa_self' => true,
+					)
+			);
   }
 
   /**
@@ -571,6 +571,44 @@ class Ezpz_Wordpress_Starter {
 
 		return $fixChars;
 
+  }
+
+	/**
+	 * Automatically adds Alt tags to images uploaded, based on the image title or filename.
+	 *
+	 * @param integer $post_ID ID of current attachment
+	 * @return array Sanitized array with updated Alt tag and title
+	 */
+	public function ezpz_auto_alt_img_upload( $post_ID ) {
+
+    // Check if uploaded file is an image, else do nothing
+
+    if ( wp_attachment_is_image( $post_ID ) ) {
+
+      $ezpz_image_title = get_post( $post_ID )->post_title;
+
+      // Sanitize the title:  remove hyphens, underscores & extra spaces:
+      $ezpz_image_title = preg_replace( '%\s*[-_\s]+\s*%', ' ',  $ezpz_image_title );
+
+      // Sanitize the title:  capitalize first letter of every word (other letters lower case):
+      $ezpz_image_title = ucwords( strtolower( $ezpz_image_title ) );
+
+      // Create an array with the image meta (Title, Caption, Description) to be updated
+      // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
+      $ezpz_image_meta = array(
+        'ID'		=> $post_ID,			// Specify the image (ID) to be updated
+        'post_title'	=> $ezpz_image_title,		// Set image Title to sanitized title
+        //'post_excerpt'	=> $ezpz_image_title,		// Set image Caption (Excerpt) to sanitized title
+        //'post_content'	=> $ezpz_image_title,		// Set image Description (Content) to sanitized title
+      );
+
+      // Set the image Alt-Text
+      update_post_meta( $post_ID, '_wp_attachment_image_alt', $ezpz_image_title );
+
+      // Set the image meta (e.g. Title, Excerpt, Content)
+      wp_update_post( $ezpz_image_meta );
+
+    }
   }
 
 }
